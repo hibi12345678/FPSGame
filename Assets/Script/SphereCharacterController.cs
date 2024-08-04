@@ -4,8 +4,8 @@ using System.Collections;
 
 public class SphereCharacterController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float jumpForce = 10f; // ジャンプ力
+   float moveSpeed = 1f;
+    public float jumpForce = 3f; // ジャンプ力
     public Transform planet;
 
     private CharacterController controller;
@@ -64,11 +64,49 @@ public class SphereCharacterController : MonoBehaviour
             {
                 animatorleg.SetBool("Walk", true);
             }
+            if (!animatormid.GetBool("Walk"))
+            {
+                animatormid.SetBool("Walk", true);
+            }
+
+            
+            animator.SetBool("Run", false);
+            animatorleg.SetBool("WalkRight", false);
+            animatorleg.SetBool("WalkLeft", false);
+            animatorleg.SetBool("WalkBack", false);
+            animatorleg.SetBool("Run", false);           
+            animatormid.SetBool("WalkRight", false);
+            animatormid.SetBool("WalkLeft", false);
+            animatormid.SetBool("WalkBack", false);
+            animatormid.SetBool("Run", false);
+            moveSpeed = 2.5f;
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                audioSources[1].UnPause();
+                audioSources[0].Pause();
+                moveSpeed = 4f;
+
+                if (!animator.GetBool("Run"))
+                {
+                    animator.SetBool("Run", true);
+                }
+
+                if (!animatorleg.GetBool("Run"))
+                {
+                    animatorleg.SetBool("Run", true);
+                }
+                if (!animatormid.GetBool("Run"))
+                {
+                    animatormid.SetBool("Run", true);
+                }
 
 
+
+            }
         }
         // Sキーで後退
-        if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S))
         {
             audioSources[0].UnPause();
             audioSources[1].Pause();
@@ -83,12 +121,28 @@ public class SphereCharacterController : MonoBehaviour
             {
                 animatorleg.SetBool("WalkBack", true);
             }
+            if (!animatormid.GetBool("WalkBack"))
+            {
+                animatormid.SetBool("WalkBack", true);
+            }
 
+           
+            animator.SetBool("Run", false);
+            animatorleg.SetBool("Walk", false);
+            animatorleg.SetBool("WalkRight", false);
+            animatorleg.SetBool("WalkLeft", false);
             
+            animatorleg.SetBool("Run", false);          
+            animatormid.SetBool("Walk", false);
+            animatormid.SetBool("WalkRight", false);
+            animatormid.SetBool("WalkLeft", false);
+            
+            animatormid.SetBool("Run", false);
+            moveSpeed = 2.5f;
 
         }
         // Aキーで左移動
-        if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A))
         {
             audioSources[0].UnPause();
             audioSources[1].Pause();
@@ -102,12 +156,28 @@ public class SphereCharacterController : MonoBehaviour
             {
                 animatorleg.SetBool("WalkLeft", true);
             }
+            if (!animatormid.GetBool("WalkLeft"))
+            {
+                animatormid.SetBool("WalkLeft", true);
+            }
 
+           
+            animator.SetBool("Run", false);
+            animatorleg.SetBool("Walk", false);
+            animatorleg.SetBool("WalkRight", false);
             
+            animatorleg.SetBool("WalkBack", false);
+            animatorleg.SetBool("Run", false);
+            animatormid.SetBool("Walk", false);
+            animatormid.SetBool("WalkRight", false);
+
+            animatormid.SetBool("WalkBack", false);
+            animatormid.SetBool("Run", false);
+            moveSpeed = 2.5f;
 
         }
         // Dキーで右移動
-        if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D))
         {
             audioSources[0].UnPause();
             audioSources[1].Pause();
@@ -122,36 +192,30 @@ public class SphereCharacterController : MonoBehaviour
             {
                 animatorleg.SetBool("WalkRight", true);
             }
+            if (!animatormid.GetBool("WalkRight"))
+            {
+                animatormid.SetBool("WalkRight", true);
+            }
 
             
+            animator.SetBool("Run", false);
+            animatorleg.SetBool("Walk", false);
+            
+            animatorleg.SetBool("WalkLeft", false);
+            animatorleg.SetBool("WalkBack", false);
+            animatorleg.SetBool("Run", false);
+            animatormid.SetBool("Walk", false);
+
+            animatormid.SetBool("WalkLeft", false);
+            animatormid.SetBool("WalkBack", false);
+            animatormid.SetBool("Run", false);
+            moveSpeed = 2.5f;
 
         }
 
-        // Wキーで前進
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
-        {
-            audioSources[1].UnPause();
-            audioSources[0].Pause();
-            moveSpeed = 7.5f;
+ 
 
-            if (!animator.GetBool("Run"))
-            {
-                animator.SetBool("Run", true);
-            }
-
-            if (!animatorleg.GetBool("Run"))
-            {
-                animatorleg.SetBool("Run", true);
-            }
-
-
-        }
-        else
-        {
-            moveSpeed = 5f;
-        }
-
-        if (moveDirection == Vector3.zero)
+        else if (moveDirection == Vector3.zero)
         {
             audioSources[0].Pause();
             audioSources[1].Pause();
@@ -162,6 +226,12 @@ public class SphereCharacterController : MonoBehaviour
             animatorleg.SetBool("WalkLeft", false);
             animatorleg.SetBool("WalkBack", false);
             animatorleg.SetBool("Run", false);
+            animatormid.SetBool("Walk", false);
+            animatormid.SetBool("WalkRight", false);
+            animatormid.SetBool("WalkLeft", false);
+            animatormid.SetBool("WalkBack", false);
+            animatormid.SetBool("Run", false);
+
         }
         // 移動ベクトルを正規化して、移動速度をかける
         moveDirection = moveDirection.normalized * moveSpeed * Time.deltaTime;
