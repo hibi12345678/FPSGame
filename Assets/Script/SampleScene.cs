@@ -10,6 +10,7 @@ public class SampleScene : MonoBehaviourPunCallbacks
         PhotonNetwork.NickName = "Player";
 
         PhotonNetwork.ConnectUsingSettings();
+        
     }
 
     public override void OnConnectedToMaster()
@@ -19,7 +20,16 @@ public class SampleScene : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        var position = new Vector3(Random.Range(-3f, 3f), 1.0f ,Random.Range(-3f, 3f));
-        PhotonNetwork.Instantiate("Avatar", position, Quaternion.identity);
+        var position = new Vector3(Random.Range(-3f, 3f), 250.0f ,Random.Range(-3f, 3f));
+        GameObject obj = PhotonNetwork.Instantiate("Player", position, Quaternion.identity);
+        obj.tag = "Team1"; 
+    }
+
+    void Upadate()
+    {
+        foreach (var player in PhotonNetwork.PlayerList)
+        {
+            Debug.Log($"{player.NickName}({player.ActorNumber})");
+        }
     }
 }

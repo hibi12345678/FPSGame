@@ -390,6 +390,7 @@
 "Assets/Script/LookAtTarget.cs"
 "Assets/Script/MouseLook.cs"
 "Assets/Script/MoveCar.cs"
+"Assets/Script/PlayerInstantiate.cs"
 "Assets/Script/RotationMid.cs"
 "Assets/Script/RotationUpper.cs"
 "Assets/Script/RotationY.cs"

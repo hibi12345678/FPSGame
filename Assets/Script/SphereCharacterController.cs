@@ -6,7 +6,7 @@ public class SphereCharacterController : MonoBehaviour
 {
    float moveSpeed = 1f;
     public float jumpForce = 3f; // ジャンプ力
-    public Transform planet;
+     Transform planet;
 
     private CharacterController controller;
     private Vector3 moveDirection = Vector3.zero;
@@ -28,6 +28,7 @@ public class SphereCharacterController : MonoBehaviour
 
     private AudioSource[] audioSources;
 
+    GameObject sphere;
     void Start()
     {        
         // Rigidbodyコンポーネントを取得
@@ -36,6 +37,8 @@ public class SphereCharacterController : MonoBehaviour
         audioSources = GetComponents<AudioSource>();
         audioSources[0].Play();
         audioSources[1].Play();
+        sphere = GameObject.Find("Planet");
+        planet = sphere.transform;
     }
 
     void Update()
