@@ -2,8 +2,15 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp:
     - AvatarDisplayName
+    - CenterRayShooter
     - CubeGravity
+    - DamageDirection
+    - Health
     - LookAtTarget
+    - RotationMid
+    - RotationUpper
+    - RotationY
+    - ScoreDisplay
     - SphereCharacterController
     - ThirdPersonCamera
     Assembly-CSharp.dll:
@@ -14,6 +21,7 @@ ScriptsOnlyBuild:
     - DamageDirection
     - Health
     - LookAtTarget
+    - PlayerInstanciate
     - RotationMid
     - RotationUpper
     - RotationY
@@ -37,14 +45,20 @@ ScriptsOnlyBuild:
     - Photon.Pun.Demo.PunBasics.PlayerUI
     - Photon.Pun.Demo.SlotRacer.PlayerControl
     - Photon.Pun.Demo.SlotRacer.Utils.SplineWalker
-    PhotonUnityNetworking.Editor.dll:
-    - Photon.Pun.PunSceneSettings
     PhotonUnityNetworking.dll:
     - Photon.Pun.PhotonTransformView
     - Photon.Pun.PhotonView
     - Photon.Pun.ServerSettings
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
+    UnityEditor.Graphs.dll:
+    - UnityEditor.Graphs.AnimationBlendTree.Graph
+    - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
+    - UnityEditor.Graphs.AnimationStateMachine.Graph
+    - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
+    - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -197,7 +211,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 8198}
     - Class: 114
-      Script: {instanceID: 31542}
+      Script: {instanceID: 42952}
+    - Class: 114
+      Script: {instanceID: 49760}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -431,7 +447,7 @@ ScriptsOnlyBuild:
     className: ScoreHelper
   - hash:
       serializedVersion: 2
-      Hash: 5d5212c21e7556ef6a9adfb45e024640
+      Hash: ec01f24191a84f4307c3bddc4b794ca9
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: SphereCharacterController
@@ -935,7 +951,7 @@ ScriptsOnlyBuild:
     className: OnlineDocButton
   - hash:
       serializedVersion: 2
-      Hash: 33f695f7955c6c77044cec6d937e7969
+      Hash: d2ecedde782e0e4604d781a637162881
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: CubeGravity
@@ -2031,6 +2047,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 36fe8dfac62ce15aef68de90332ceca9
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: PlayerInstanciate
   platform: 19
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
