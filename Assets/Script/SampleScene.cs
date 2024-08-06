@@ -19,7 +19,8 @@ public class SampleScene : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        var position = new Vector3(Random.Range(-3f, 3f), 1.0f ,Random.Range(-3f, 3f));
-        PhotonNetwork.Instantiate("Avatar", position, Quaternion.identity);
+        var position = new Vector3(Random.Range(-3f, 3f), 250.0f ,Random.Range(-3f, 3f));
+        GameObject obj = PhotonNetwork.Instantiate("Player", position, Quaternion.identity);
+        obj.tag = "Team1";
     }
 }

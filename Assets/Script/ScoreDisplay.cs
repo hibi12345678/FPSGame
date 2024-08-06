@@ -8,7 +8,7 @@ public class ScoreDisplay : MonoBehaviour
     public GameObject defeat;
     public GameObject victory;
     public GameObject draw;
-    public GameObject timer;
+    GameObject timer;
     // ©•ª©g‚Ìƒ^ƒO‚ğæ“¾
     string myTag;
     float timeRem;
@@ -17,9 +17,12 @@ public class ScoreDisplay : MonoBehaviour
     int team2;
     public Text uiText1;
     public Text uiText2;
+    
     // Start is called before the first frame update
     void Start()
     {
+        timer = GameObject.Find("Timer");
+        
         myTag = gameObject.tag;
     }
 

@@ -6,7 +6,7 @@ public class SphereCharacterController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 10f; // ジャンプ力
-    public Transform planet;
+    
 
     private CharacterController controller;
     private Vector3 moveDirection = Vector3.zero;
@@ -27,7 +27,8 @@ public class SphereCharacterController : MonoBehaviour
     float currentLegYPosition;
 
     private AudioSource[] audioSources;
-
+    Transform planet;
+    GameObject sphere;
     void Start()
     {        
         // Rigidbodyコンポーネントを取得
@@ -36,64 +37,112 @@ public class SphereCharacterController : MonoBehaviour
         audioSources = GetComponents<AudioSource>();
         audioSources[0].Play();
         audioSources[1].Play();
+        sphere = GameObject.Find("Planet");
+        planet = sphere.transform;
     }
 
     void Update()
     {
-
         // 子オブジェクトのローカル座標系での方向を取得
         Vector3 childForward = childTransform.forward;
         Vector3 childRight = childTransform.right;
-
         // 移動ベクトルを初期化
         Vector3 moveDirection = Vector3.zero;
-
         // Wキーで前進
         if (Input.GetKey(KeyCode.W))
         {
             audioSources[0].UnPause();
             audioSources[1].Pause();
             moveDirection += childForward;
-
             if (!animator.GetBool("Walk"))
             {
                 animator.SetBool("Walk", true);
-
             }
             if (!animatorleg.GetBool("Walk"))
             {
                 animatorleg.SetBool("Walk", true);
             }
+            if (!animatormid.GetBool("Walk"))
+            {
+                animatormid.SetBool("Walk", true);
+            }
 
 
+            animator.SetBool("Run", false);
+            animatorleg.SetBool("WalkRight", false);
+            animatorleg.SetBool("WalkLeft", false);
+            animatorleg.SetBool("WalkBack", false);
+            animatorleg.SetBool("Run", false);
+            animatormid.SetBool("WalkRight", false);
+            animatormid.SetBool("WalkLeft", false);
+            animatormid.SetBool("WalkBack", false);
+            animatormid.SetBool("Run", false);
+            moveSpeed = 2.5f;
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                audioSources[1].UnPause();
+                audioSources[0].Pause();
+                moveSpeed = 4f;
+
+                if (!animator.GetBool("Run"))
+                {
+                    animator.SetBool("Run", true);
+                }
+
+                if (!animatorleg.GetBool("Run"))
+                {
+                    animatorleg.SetBool("Run", true);
+                }
+                if (!animatormid.GetBool("Run"))
+                {
+                    animatormid.SetBool("Run", true);
+                }
+
+
+
+            }
         }
         // Sキーで後退
-        if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S))
         {
             audioSources[0].UnPause();
             audioSources[1].Pause();
             moveDirection -= childForward;
-
             if (!animator.GetBool("Walk"))
             {
                 animator.SetBool("Walk", true);
             }
-
             if (!animatorleg.GetBool("WalkBack"))
             {
                 animatorleg.SetBool("WalkBack", true);
             }
+            if (!animatormid.GetBool("WalkBack"))
+            {
+                animatormid.SetBool("WalkBack", true);
+            }
 
-            
+
+            animator.SetBool("Run", false);
+            animatorleg.SetBool("Walk", false);
+            animatorleg.SetBool("WalkRight", false);
+            animatorleg.SetBool("WalkLeft", false);
+
+            animatorleg.SetBool("Run", false);
+            animatormid.SetBool("Walk", false);
+            animatormid.SetBool("WalkRight", false);
+            animatormid.SetBool("WalkLeft", false);
+
+            animatormid.SetBool("Run", false);
+            moveSpeed = 2.5f;
 
         }
         // Aキーで左移動
-        if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A))
         {
             audioSources[0].UnPause();
             audioSources[1].Pause();
             moveDirection -= childRight;
-
             if (!animator.GetBool("Walk"))
             {
                 animator.SetBool("Walk", true);
@@ -102,56 +151,64 @@ public class SphereCharacterController : MonoBehaviour
             {
                 animatorleg.SetBool("WalkLeft", true);
             }
+            if (!animatormid.GetBool("WalkLeft"))
+            {
+                animatormid.SetBool("WalkLeft", true);
+            }
 
-            
+
+            animator.SetBool("Run", false);
+            animatorleg.SetBool("Walk", false);
+            animatorleg.SetBool("WalkRight", false);
+
+            animatorleg.SetBool("WalkBack", false);
+            animatorleg.SetBool("Run", false);
+            animatormid.SetBool("Walk", false);
+            animatormid.SetBool("WalkRight", false);
+
+            animatormid.SetBool("WalkBack", false);
+            animatormid.SetBool("Run", false);
+            moveSpeed = 2.5f;
 
         }
         // Dキーで右移動
-        if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D))
         {
             audioSources[0].UnPause();
             audioSources[1].Pause();
             moveDirection += childRight;
-
             if (!animator.GetBool("Walk"))
             {
                 animator.SetBool("Walk", true);
             }
-
             if (!animatorleg.GetBool("WalkRight"))
             {
                 animatorleg.SetBool("WalkRight", true);
             }
-
-            
-
-        }
-
-        // Wキーで前進
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
-        {
-            audioSources[1].UnPause();
-            audioSources[0].Pause();
-            moveSpeed = 7.5f;
-
-            if (!animator.GetBool("Run"))
+            if (!animatormid.GetBool("WalkRight"))
             {
-                animator.SetBool("Run", true);
-            }
-
-            if (!animatorleg.GetBool("Run"))
-            {
-                animatorleg.SetBool("Run", true);
+                animatormid.SetBool("WalkRight", true);
             }
 
 
-        }
-        else
-        {
-            moveSpeed = 5f;
+            animator.SetBool("Run", false);
+            animatorleg.SetBool("Walk", false);
+
+            animatorleg.SetBool("WalkLeft", false);
+            animatorleg.SetBool("WalkBack", false);
+            animatorleg.SetBool("Run", false);
+            animatormid.SetBool("Walk", false);
+
+            animatormid.SetBool("WalkLeft", false);
+            animatormid.SetBool("WalkBack", false);
+            animatormid.SetBool("Run", false);
+            moveSpeed = 2.5f;
+
         }
 
-        if (moveDirection == Vector3.zero)
+
+
+        else if (moveDirection == Vector3.zero)
         {
             audioSources[0].Pause();
             audioSources[1].Pause();
@@ -162,6 +219,12 @@ public class SphereCharacterController : MonoBehaviour
             animatorleg.SetBool("WalkLeft", false);
             animatorleg.SetBool("WalkBack", false);
             animatorleg.SetBool("Run", false);
+            animatormid.SetBool("Walk", false);
+            animatormid.SetBool("WalkRight", false);
+            animatormid.SetBool("WalkLeft", false);
+            animatormid.SetBool("WalkBack", false);
+            animatormid.SetBool("Run", false);
+
         }
         // 移動ベクトルを正規化して、移動速度をかける
         moveDirection = moveDirection.normalized * moveSpeed * Time.deltaTime;
